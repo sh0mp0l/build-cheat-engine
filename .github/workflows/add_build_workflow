@@ -1,0 +1,22 @@
+name: Build Cheat Engine
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      
+    - name: Setup Lazarus
+      uses: gcarreno/setup-lazarus@v1
+      with:
+        lazarus-version: '2.2.0'
+        
+    - name: Build Cheat Engine
+      run: |
+        cd CE
+        lazbuild -B --os=win64 --cpu=x86_64 cheatengine.lpi
